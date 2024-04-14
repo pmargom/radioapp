@@ -30,4 +30,22 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
     return radioStations;
   }
+
+  @override
+  Future<List<RadioStationModel>> getRadioStationByUUID(String stationUUID) async {
+    List<RadioStationModel> radioStationModels = [];
+    try {
+      final Map<String, dynamic> queryParameters = {"uuids": stationUUID};
+
+      Response? response = await _serviceBaseApi.get("stations/byuuid", queryParameters: queryParameters);
+
+      if (response != null) {
+        radioStationModels = RadioStationModel.fromJsonList(response.data);
+      }
+
+      return radioStationModels;
+    } catch (e) {
+      throw ServerException();
+    }
+  }
 }

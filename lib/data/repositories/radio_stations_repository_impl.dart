@@ -22,4 +22,16 @@ class RadioStationsRepositoryImpl implements RadioStationsRepository {
       return Left(ServerFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, List<RadioStationEntity>>> getRadioStationByUUID(String stationUUID) async {
+    try {
+      final List<RadioStationModel> radioStationModels = await _remoteDataSource.getRadioStationByUUID(stationUUID);
+      final List<RadioStationEntity> radioStationEntity =
+          radioStationModels.map((RadioStationModel radioStationModel) => radioStationModel.asEntity).toList();
+      return Right(radioStationEntity);
+    } catch (e) {
+      return Left(ServerFailure());
+    }
+  }
 }

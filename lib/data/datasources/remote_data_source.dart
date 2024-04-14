@@ -6,4 +6,6 @@ abstract class RemoteDataSource {
     int limit = 50,
     bool hidebroken = true,
   ]);
+
+  Future<List<RadioStationModel>> getRadioStationByUUID(String stationUUID);
 }
