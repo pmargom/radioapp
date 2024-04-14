@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:radioapp/domain/entities/radio_station_entity.dart';
-import 'package:radioapp/domain/usecases/get_radio_station_usecase.dart';
+import 'package:radioapp/domain/usecases/get_radio_stations_usecase.dart';
 
 part 'radio_stations_state.dart';
 
