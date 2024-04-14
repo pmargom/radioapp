@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'api_mappings.dart';
 import 'interceptors.dart';
 
-class ServicesBaseApi {
-  Dio dio = Dio();
+final Dio dio = Dio();
 
+class ServicesBaseApi {
   ServicesBaseApi() {
     dio.interceptors.add(AppInterceptors());
 
     // http options
     dio.options.baseUrl = ApiMappings.baseUrl;
-    dio.options.connectTimeout = const Duration(seconds: 10);
-    dio.options.receiveTimeout = const Duration(seconds: 10);
-    // dio.options.connectTimeout = 10000;
-    // dio.options.receiveTimeout = 10000;
+    // dio.options.connectTimeout = const Duration(seconds: 10);
+    // dio.options.receiveTimeout = const Duration(seconds: 10);
+    dio.options.connectTimeout = 10000;
+    dio.options.receiveTimeout = 10000;
   }
 
   Future<Response?> get(
@@ -25,7 +25,8 @@ class ServicesBaseApi {
     try {
       final response = await dio.get(url, queryParameters: queryParameters);
       return response;
-    } on DioException catch (e) {
+      // } on DioException catch (e) {
+    } on DioError catch (e) {
       if (e.response != null) {
         debugPrint(e.response!.data);
       }
@@ -43,7 +44,8 @@ class ServicesBaseApi {
     try {
       final response = await dio.post(url, data: data, queryParameters: queryParameters);
       return response;
-    } on DioException catch (e) {
+      // } on DioException catch (e) {
+    } on DioError catch (e) {
       if (e.response != null) {
         debugPrint(e.response!.data);
       }

@@ -17,7 +17,8 @@ class AppInterceptors extends Interceptor {
   }
 
   @override
-  Future onError(DioException err, ErrorInterceptorHandler handler) async {
+  // Future onError(DioException err, ErrorInterceptorHandler handler) async {
+  Future onError(DioError err, ErrorInterceptorHandler handler) async {
     debugPrint('ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
     try {
       if (err.response?.statusCode == 401) {
