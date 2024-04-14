@@ -102,7 +102,18 @@ class _HomeScreenState extends State<HomeScreen> {
         if (state is RadioStationsLoaded) {
           final radioStations = state.radioStationEntities;
           if (radioStations.isEmpty) {
-            return const NoDataWidget(message: "No results");
+            return Column(
+              children: [
+                const SizedBox(height: 40),
+                const NoDataWidget(message: "No results"),
+                IconButton(
+                  onPressed: _loadRadioStations,
+                  icon: const Icon(
+                    Icons.refresh_outlined,
+                  ),
+                ),
+              ],
+            );
           }
           return RadioStationsListWidget(radioStations: radioStations);
         }
